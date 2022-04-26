@@ -1,4 +1,5 @@
 using RPG.Core;
+using System;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -13,17 +14,29 @@ namespace RPG.Combat
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
 
+        const string WEAPON_NAME = "Weapon";
+
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
+            DestroyOldWeapon(rightHand, leftHand);
+
             if (equippedPrefab != null)
             {
                 var handTransform = GetHandTransform(rightHand, leftHand);
-                Instantiate(equippedPrefab, handTransform);
+                var weapon = Instantiate(equippedPrefab, handTransform);
+                weapon.name = WEAPON_NAME;
             }
+
+            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
 
             if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
+            }
+            else if (overrideController != null)
+            {
+                // if it is already an override, find its parent and put that in the runtimeAnimator slot.
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
         }
 
@@ -54,6 +67,23 @@ namespace RPG.Combat
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)
         {
             return isRightHanded ? rightHand : leftHand;
+        }
+
+        private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+        {
+            var oldWeapon = rightHand.Find(WEAPON_NAME);
+            if (oldWeapon == null)
+            {
+                oldWeapon = leftHand.Find(WEAPON_NAME);
+            }
+
+            if (oldWeapon == null)
+            {
+                return;
+            }
+
+            oldWeapon.name = "DESTROYING"; // dido: because of concurency issue when picking the new weapon.
+            Destroy(oldWeapon.gameObject);
         }
     }
 }
