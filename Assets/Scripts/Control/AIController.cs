@@ -1,3 +1,4 @@
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Control;
 using RPG.Core;
@@ -26,12 +27,16 @@ namespace RGP.Control
         float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int _currentWaypointIndex = 0;
 
-        private void Start()
+        private void Awake()
         {
             _fighter = GetComponent<Fighter>();
             _health = GetComponent<Health>();
-            _player = GameObject.FindWithTag("Player");
             _mover = GetComponent<Mover>();
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        private void Start()
+        {
             _guardPosition = transform.position;
         }
 

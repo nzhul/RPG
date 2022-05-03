@@ -8,15 +8,18 @@ namespace RPG.SceneManagement
     {
         const string defaultSaveFile = "save";
 
-        [SerializeField] float fadeInTime;
+        [SerializeField] float fadeInTime = 0.2f;
 
-        // dido: Start method can be called as Coroutine by changing this return type from void to IEnumerator
-        private IEnumerator Start()
+        private void Awake()
         {
-            var fader = FindObjectOfType<Fader>();
+            StartCoroutine(LoadLastScene());
+        }
 
-            fader.FadeOutImmediate();
+        private IEnumerator LoadLastScene()
+        {
             yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+            var fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
             yield return fader.FadeIn(fadeInTime);
         }
 
@@ -30,6 +33,10 @@ namespace RPG.SceneManagement
             {
                 Load();
             }
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                Delete();
+            }
         }
 
         public void Load()
@@ -40,6 +47,11 @@ namespace RPG.SceneManagement
         public void Save()
         {
             GetComponent<SavingSystem>().Save(defaultSaveFile);
+        }
+
+        public void Delete()
+        {
+            GetComponent<SavingSystem>().Delete(defaultSaveFile);
         }
     }
 }

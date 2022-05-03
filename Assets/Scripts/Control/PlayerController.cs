@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Combat;
 using RPG.Combat;
-using RPG.Core;
+using RPG.Attributes;
 using RPG.Movement;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace RPG.Control
     {
         private Health _health;
 
-        private void Start()
+        private void Awake()
         {
             _health = GetComponent<Health>();
         }
