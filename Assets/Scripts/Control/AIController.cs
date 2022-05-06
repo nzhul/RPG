@@ -3,6 +3,7 @@ using RPG.Combat;
 using RPG.Control;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Utils;
 using UnityEngine;
 
 namespace RGP.Control
@@ -22,7 +23,7 @@ namespace RGP.Control
         Health _health;
         GameObject _player;
         Mover _mover;
-        Vector3 _guardPosition;
+        LazyValue<Vector3> _guardPosition;
         float _timeSinceLastSawPlayer = Mathf.Infinity;
         float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int _currentWaypointIndex = 0;
@@ -33,11 +34,18 @@ namespace RGP.Control
             _health = GetComponent<Health>();
             _mover = GetComponent<Mover>();
             _player = GameObject.FindWithTag("Player");
+
+            _guardPosition = new LazyValue<Vector3>(GetGuardPosition);
+        }
+
+        private Vector3 GetGuardPosition()
+        {
+            return transform.position;
         }
 
         private void Start()
         {
-            _guardPosition = transform.position;
+            _guardPosition.ForceInit();
         }
 
         private void Update()
@@ -72,7 +80,7 @@ namespace RGP.Control
         private void PatrolBehaviour()
         {
 
-            var nextPosition = _guardPosition;
+            var nextPosition = _guardPosition.value;
 
             if (patrolPath != null)
             {

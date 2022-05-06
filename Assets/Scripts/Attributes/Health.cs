@@ -1,6 +1,7 @@
 ﻿using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
+using RPG.Utils;
 using UnityEngine;
 
 namespace RPG.Attributes
@@ -9,18 +10,25 @@ namespace RPG.Attributes
     {
         [SerializeField] float regenerationPercentage = 70;
 
-        float health = -1f;
+        LazyValue<float> health;
 
         bool isDead = false;
 
+        private void Awake()
+        {
+            // dido: lazy value wrapper initialize the property when it is used, not on Start()
+            health = new LazyValue<float>(GetInitialHealth);
+        }
+
+        private float GetInitialHealth()
+        {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
         private void Start()
         {
-            // dido: race condition solution.
-            // problem was that restoreState was executed before Start().
-            if (health < 0)
-            {
-                health = GetComponent<BaseStats>().GetStat(Stat.Health);
-            }
+            // dido: if until this point the health has not being initialized, we initialize it by force.
+            health.ForceInit();
         }
 
         private void OnEnable()
@@ -42,9 +50,9 @@ namespace RPG.Attributes
         {
             print(gameObject.name + " took damage: " + damage);
 
-            health = Mathf.Max(health - damage, 0);
+            health.value = Mathf.Max(health.value - damage, 0);
 
-            if (health == 0)
+            if (health.value == 0)
             {
                 Die();
                 AwardExperience(instigator);
@@ -53,7 +61,7 @@ namespace RPG.Attributes
 
         public float GetHealthPoints()
         {
-            return health;
+            return health.value;
         }
 
         public float GetMaxHealthpoints()
@@ -63,14 +71,14 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return 100 * (health / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * (health.value / GetComponent<BaseStats>().GetStat(Stat.Health));
         }
 
         private void RegenerateHealth()
         {
             //dido: this function regenerates us to maximum of 70%
             var regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * regenerationPercentage / 100;
-            health = Mathf.Max(health, regenHealthPoints);
+            health.value = Mathf.Max(health.value, regenHealthPoints);
         }
 
         private void Die()
@@ -98,14 +106,14 @@ namespace RPG.Attributes
 
         public object CaptureState()
         {
-            return health;
+            return health.value;
         }
 
         public void RestoreState(object state)
         {
-            health = (float)state;
+            health.value = (float)state;
 
-            if (health <= 0)
+            if (health.value <= 0)
             {
                 Die();
             }
