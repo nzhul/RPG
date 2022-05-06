@@ -3,12 +3,20 @@ using RPG.Saving;
 using RPG.Stats;
 using RPG.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage = 70;
+        [SerializeField] UnityEvent<float> onTakeDamage;
+
+        // dido: use this subclas instead of UnityEvent<float> if the above do not work.
+        //[Serializable]
+        //public class TakeDamageEvent : UnityEvent<float>
+        //{
+        //}
 
         LazyValue<float> health;
 
@@ -50,6 +58,13 @@ namespace RPG.Attributes
         {
             print(gameObject.name + " took damage: " + damage);
 
+            // dido: this is not part of the course. 
+            // I decided to show the actual damage being done on final hit.
+            // So even if I do 50 damage. If the enemy have 10 hp left, i will do only 10 damage.
+            // ^^ probably not a great idea to use this method in real game as it will look strange to the player.
+
+            //var damageDealt = damage < health.value ? damage : (damage - health.value);
+
             health.value = Mathf.Max(health.value - damage, 0);
 
             if (health.value == 0)
@@ -57,6 +72,8 @@ namespace RPG.Attributes
                 Die();
                 AwardExperience(instigator);
             }
+
+            onTakeDamage.Invoke(damage);
         }
 
         public float GetHealthPoints()
@@ -71,7 +88,12 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return 100 * (health.value / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * GetFraction();
+        }
+
+        public float GetFraction()
+        {
+            return health.value / GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         private void RegenerateHealth()

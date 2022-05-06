@@ -36,7 +36,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3677526794084380183}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,6 +178,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regenerationPercentage: 70
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5571658876628556360}
+        m_TargetAssemblyTypeName: RPG.UI.DamageText.DamageTextSpawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9195319187222844060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +239,76 @@ MonoBehaviour:
   progression: {fileID: 11400000, guid: b3cf41cdf0489f34b825d13baa6113f5, type: 2}
   levelUpParticleEffect: {fileID: 0}
   shouldUseModifiers: 1
+--- !u!1001 &6026244030638462585
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4810244086531648758}
+    m_Modifications:
+    - target: {fileID: 3885270969371330714, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_Name
+      value: Damage Text Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+--- !u!4 &3677526794084380183 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6965017102304901230, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+  m_PrefabInstance: {fileID: 6026244030638462585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5571658876628556360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2230134203601570865, guid: 446722b8688efb64b8f0aeba1f86d5a2, type: 3}
+  m_PrefabInstance: {fileID: 6026244030638462585}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec55729880767d145bb2d13eba2c3c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
