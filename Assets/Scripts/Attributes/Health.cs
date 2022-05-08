@@ -11,6 +11,7 @@ namespace RPG.Attributes
     {
         [SerializeField] float regenerationPercentage = 70;
         [SerializeField] UnityEvent<float> onTakeDamage;
+        [SerializeField] UnityEvent onDie;
 
         // dido: use this subclas instead of UnityEvent<float> if the above do not work.
         //[Serializable]
@@ -26,11 +27,6 @@ namespace RPG.Attributes
         {
             // dido: lazy value wrapper initialize the property when it is used, not on Start()
             health = new LazyValue<float>(GetInitialHealth);
-        }
-
-        private float GetInitialHealth()
-        {
-            return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         private void Start()
@@ -56,7 +52,7 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
-            print(gameObject.name + " took damage: " + damage);
+            //print(gameObject.name + " took damage: " + damage);
 
             // dido: this is not part of the course. 
             // I decided to show the actual damage being done on final hit.
@@ -69,12 +65,19 @@ namespace RPG.Attributes
 
             if (health.value == 0)
             {
+                onDie.Invoke();
                 Die();
                 AwardExperience(instigator);
             }
 
             onTakeDamage.Invoke(damage);
         }
+
+        public void Heal(float healthToRestore)
+        {
+            health.value = Mathf.Min(health.value + healthToRestore, GetMaxHealthpoints());
+        }
+
 
         public float GetHealthPoints()
         {
@@ -94,6 +97,11 @@ namespace RPG.Attributes
         public float GetFraction()
         {
             return health.value / GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
+        private float GetInitialHealth()
+        {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         private void RegenerateHealth()

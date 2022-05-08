@@ -7,6 +7,10 @@ using UnityEngine.EventSystems;
 
 namespace RPG.Control
 {
+    // DIDO:
+    // IgnoreRayCastLayer! > I've set the player prefab to be on IgnoreRayCast Layer to avoid problems with movement,
+    // when clicking on top of player
+    // This might cause problems in future - keep that in mind!
     public class PlayerController : MonoBehaviour
     {
         private Health _health;
