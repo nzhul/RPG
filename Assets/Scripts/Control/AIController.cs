@@ -12,12 +12,13 @@ namespace RGP.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3f;
+        [SerializeField] float agroCooldownTime = 5f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointDwellTime = 3f;
-
         [Range(0f, 1f)]
         [SerializeField] float patrolSpeedFraction = 0.2f;
+        [SerializeField] float shoutDistance = 7f;
 
         Fighter _fighter;
         Health _health;
@@ -26,6 +27,7 @@ namespace RGP.Control
         LazyValue<Vector3> _guardPosition;
         float _timeSinceLastSawPlayer = Mathf.Infinity;
         float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        float _timeSinceAggrevated = Mathf.Infinity;
         int _currentWaypointIndex = 0;
 
         private void Awake()
@@ -55,7 +57,7 @@ namespace RGP.Control
                 return;
             }
 
-            if (InAttackRange() && _fighter.CanAttack(_player))
+            if (IsAggrevated() && _fighter.CanAttack(_player))
             {
                 AttackBehaviour();
             }
@@ -75,6 +77,18 @@ namespace RGP.Control
         {
             _timeSinceLastSawPlayer += Time.deltaTime;
             _timeSinceArrivedAtWaypoint += Time.deltaTime;
+            _timeSinceAggrevated += Time.deltaTime;
+
+
+            if (_timeSinceAggrevated != Mathf.Infinity)
+            {
+                print(_timeSinceAggrevated);
+            }
+        }
+
+        public void Aggrevate()
+        {
+            _timeSinceAggrevated = 0;
         }
 
         private void PatrolBehaviour()
@@ -125,12 +139,32 @@ namespace RGP.Control
         {
             _timeSinceLastSawPlayer = 0;
             _fighter.Attack(_player);
+
+            AggrevateNearbyEnemies();
         }
 
-        private bool InAttackRange()
+        // dido: there is still a bug, because all enemies are agroing themself each frame.
+        // which leads to infinate chasing.
+        private void AggrevateNearbyEnemies()
+        {
+            var hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0f);
+
+            foreach (var hit in hits)
+            {
+                var ai = hit.collider.GetComponent<AIController>();
+                if (ai == null) continue;
+
+                // Should not reference self
+                if (ai == this) continue;
+
+                ai.Aggrevate();
+            }
+        }
+
+        private bool IsAggrevated()
         {
             var distance = Vector3.Distance(transform.position, _player.transform.position);
-            return distance < chaseDistance;
+            return distance < chaseDistance || _timeSinceAggrevated < agroCooldownTime;
         }
 
         private void OnDrawGizmosSelected()
@@ -138,6 +172,11 @@ namespace RGP.Control
 #if UNITY_EDITOR
             UnityEditor.Handles.color = Color.yellow;
             UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, chaseDistance);
+#endif
+
+#if UNITY_EDITOR
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, shoutDistance);
 #endif
 
             // Alternative.
