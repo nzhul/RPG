@@ -78,12 +78,6 @@ namespace RGP.Control
             _timeSinceLastSawPlayer += Time.deltaTime;
             _timeSinceArrivedAtWaypoint += Time.deltaTime;
             _timeSinceAggrevated += Time.deltaTime;
-
-
-            if (_timeSinceAggrevated != Mathf.Infinity)
-            {
-                print(_timeSinceAggrevated);
-            }
         }
 
         public void Aggrevate()
