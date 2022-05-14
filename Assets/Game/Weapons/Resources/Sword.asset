@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1afcaf569ea13a46b7f5465bd4e30de, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  itemID: 67f60fef-9e28-4bbb-86f4-febe481060f3
+  displayName: Short Sword
+  description: Regular sword
+  icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
+  pickup: {fileID: 2704517281272965436, guid: 4842ff34c30391a4ba99e0d4c3053208, type: 3}
+  stackable: 0
+  allowedEquipLocation: 5
   animatorOverride: {fileID: 22100000, guid: 53615671c0ab547428d79d891fffee25, type: 2}
   equippedPrefab: {fileID: 344296027093452459, guid: 8ecf466dac7bc22408fb57e45157c4e8, type: 3}
   weaponDamage: 10
