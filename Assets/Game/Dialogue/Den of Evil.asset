@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7744943051749957448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: 6969ec23-3249-4e3b-a111-2941c42f2ce6
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Stay safe brother! Talk to me when you are ready!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 566
+    y: 284
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and: []
+--- !u!114 &-7230754237406560404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: 8980b2bc-0aa5-4fc7-b59e-1e11647de061
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: There is a place of great evil in the wilderness. Kashya's Rogue scouts have
+    informed me that a cave nearby is filled with shadowy creatures and horrors from
+    beyond the grave.
+  children:
+  - bc063ca4-d5e1-4ef9-a40e-c27df51336ea
+  - 4959505b-98e3-4871-bad8-ba6cf12cef3e
+  - de7350f9-b9fb-4f6e-bfeb-3e0aae6f9d2a
+  - 44c54ab6-c61c-48d7-950e-dab2dcdfc9f0
+  rect:
+    serializedVersion: 2
+    x: 68
+    y: 53
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and: []
+--- !u!114 &-6941709022703789650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: d8eb1364-aacc-4171-860a-297ee80d4199
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: I've marked the location on your map!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 569
+    y: 174
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: GiveQuest
+  condition:
+    and: []
+--- !u!114 &-4983649882332140604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: de7350f9-b9fb-4f6e-bfeb-3e0aae6f9d2a
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: I started the clensing, but i need to repair my armor.
+  children:
+  - 6969ec23-3249-4e3b-a111-2941c42f2ce6
+  rect:
+    serializedVersion: 2
+    x: 315
+    y: 284
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and:
+    - or:
+      - predicate: HasQuest
+        parameters:
+        - Den of Evil
+        negate: 0
+    - or:
+      - predicate: CompletedQuest
+        parameters:
+        - Den of Evil
+        negate: 1
+--- !u!114 &-766362863372316749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: 44c54ab6-c61c-48d7-950e-dab2dcdfc9f0
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: I found this strange bottle in the den. Do you need it!
+  children:
+  - d0e6cef7-d790-4c0a-933e-5fd2b3d2b46c
+  rect:
+    serializedVersion: 2
+    x: 314
+    y: 388
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and:
+    - or:
+      - predicate: HasQuest
+        parameters:
+        - Den of Evil
+        negate: 0
+    - or:
+      - predicate: CompletedQuest
+        parameters:
+        - Den of Evil
+        negate: 0
+      - predicate: HasInventoryItem
+        parameters:
+        - 23056917-f4ba-45b5-91d0-559f644615c4
+        negate: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151bf0a4adb494d9cbad3d3992badc, type: 3}
+  m_Name: Den of Evil
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -7230754237406560404}
+  - {fileID: 608171561595067194}
+  - {fileID: 3522537205042257865}
+  - {fileID: -6941709022703789650}
+  - {fileID: -4983649882332140604}
+  - {fileID: -7744943051749957448}
+  - {fileID: -766362863372316749}
+  - {fileID: 7955230477836178717}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &608171561595067194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: bc063ca4-d5e1-4ef9-a40e-c27df51336ea
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: That sounds scary! I am out of here!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 318
+    y: 53
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and: []
+--- !u!114 &3522537205042257865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: 4959505b-98e3-4871-bad8-ba6cf12cef3e
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: I shall purge those demons from the face of earth! Can you show me the location
+    on the map!
+  children:
+  - d8eb1364-aacc-4171-860a-297ee80d4199
+  rect:
+    serializedVersion: 2
+    x: 316
+    y: 173
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and:
+    - or:
+      - predicate: HasQuest
+        parameters:
+        - Den of Evil
+        negate: 1
+--- !u!114 &7955230477836178717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bc7e408dd30c14faca4348cd6d4993, type: 3}
+  m_Name: d0e6cef7-d790-4c0a-933e-5fd2b3d2b46c
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Oh this is an mana elixir! You can use it to restore your energy!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 564
+    y: 388
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    and: []

@@ -1,3 +1,4 @@
+using RPG.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace RPG.Dialogue
 
         public IEnumerable<DialogueNode> GetChoises()
         {
-            return _currentDialogue.GetPlayerChildren(_currentNode);
+            return FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode));
         }
 
         public void SelectChoise(DialogueNode chosenNode)
@@ -81,7 +82,7 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            var numPlayerResponses = _currentDialogue.GetPlayerChildren(_currentNode).Count();
+            var numPlayerResponses = FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode)).Count();
             if (numPlayerResponses > 0)
             {
                 isChoosing = true;
@@ -90,7 +91,7 @@ namespace RPG.Dialogue
                 return;
             }
 
-            var children = _currentDialogue.GetAIChildren(_currentNode).ToArray();
+            var children = FilterOnCondition(_currentDialogue.GetAIChildren(_currentNode)).ToArray();
             int randomIndex = UnityEngine.Random.Range(0, children.Count());
             TriggerExitAction();
             _currentNode = children[randomIndex];
@@ -100,7 +101,23 @@ namespace RPG.Dialogue
 
         public bool HasNext()
         {
-            return _currentDialogue.GetAllChildren(_currentNode).Count() > 0;
+            return FilterOnCondition(_currentDialogue.GetAllChildren(_currentNode)).Count() > 0;
+        }
+
+        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNodes)
+        {
+            foreach (var node in inputNodes)
+            {
+                if (node.CheckCondition(GetEvaluators()))
+                {
+                    yield return node;
+                }
+            }
+        }
+
+        private IEnumerable<IPredicateEvaluator> GetEvaluators()
+        {
+            return GetComponents<IPredicateEvaluator>();
         }
 
         private void TriggerEnterAction()
