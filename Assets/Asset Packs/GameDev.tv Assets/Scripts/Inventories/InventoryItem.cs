@@ -27,6 +27,8 @@ namespace GameDevTV.Inventories
         [SerializeField] Pickup pickup = null;
         [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
         [SerializeField] bool stackable = false;
+        [SerializeField] float price;
+        [SerializeField] ItemCategory category = ItemCategory.None;
 
         // STATE
         static Dictionary<string, InventoryItem> itemLookupCache;
@@ -63,7 +65,7 @@ namespace GameDevTV.Inventories
             if (itemID == null || !itemLookupCache.ContainsKey(itemID)) return null;
             return itemLookupCache[itemID];
         }
-        
+
         /// <summary>
         /// Spawn the pickup gameobject into the world.
         /// </summary>
@@ -92,7 +94,7 @@ namespace GameDevTV.Inventories
         {
             return stackable;
         }
-        
+
         public string GetDisplayName()
         {
             return displayName;
@@ -103,8 +105,18 @@ namespace GameDevTV.Inventories
             return description;
         }
 
+        public float GetPrice()
+        {
+            return price;
+        }
+
+        public ItemCategory GetCategory()
+        {
+            return category;
+        }
+
         // PRIVATE
-        
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             // Generate and save a new UUID if this is blank.

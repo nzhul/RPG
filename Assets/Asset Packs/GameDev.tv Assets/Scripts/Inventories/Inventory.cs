@@ -2,6 +2,7 @@
 using UnityEngine;
 using RPG.Saving;
 using RPG.Core;
+using System.Collections.Generic;
 
 namespace GameDevTV.Inventories
 {
@@ -48,6 +49,42 @@ namespace GameDevTV.Inventories
         public bool HasSpaceFor(InventoryItem item)
         {
             return FindSlot(item) >= 0;
+        }
+
+        public bool HasSpaceFor(IEnumerable<InventoryItem> items)
+        {
+            var freeSlots = FreeSlots();
+            var stackedItems = new List<InventoryItem>();
+
+            foreach (var item in items)
+            {
+                if (item.IsStackable())
+                {
+                    if (HasItem(item)) continue;
+                    if (stackedItems.Contains(item)) continue;
+                    stackedItems.Add(item);
+                }
+
+                if (freeSlots <= 0) return false;
+                freeSlots--;
+            }
+
+            return true;
+        }
+
+        public int FreeSlots()
+        {
+            var count = 0;
+
+            foreach (var slot in slots)
+            {
+                if (slot.number == 0)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         /// <summary>
