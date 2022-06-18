@@ -1,6 +1,7 @@
 using GameDevTV.Inventories;
 using RPG.Control;
 using RPG.Inventories;
+using RPG.Saving;
 using RPG.Stats;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace RPG.Shops
 {
-    public class Shop : MonoBehaviour, IRaycastable
+    public class Shop : MonoBehaviour, IRaycastable, ISaveable
     {
         [SerializeField] string shopName;
 
@@ -28,7 +29,7 @@ namespace RPG.Shops
         }
 
         Dictionary<InventoryItem, int> transaction = new Dictionary<InventoryItem, int>();
-        Dictionary<InventoryItem, int> stock = new Dictionary<InventoryItem, int>();
+        Dictionary<InventoryItem, int> stockSold = new Dictionary<InventoryItem, int>();
         private Shopper _currentShopper;
         private bool isBuyingMode = true;
         ItemCategory filter = ItemCategory.None;
@@ -39,7 +40,7 @@ namespace RPG.Shops
         {
             foreach (var config in stockConfig)
             {
-                stock[config.item] = config.initialStock;
+                stockSold[config.item] = config.initialStock;
             }
         }
 
@@ -185,7 +186,7 @@ namespace RPG.Shops
 
             AddToTransaction(item, -1);
             shopperInventory.RemoveFromSlot(slot, 1);
-            stock[item]++;
+            stockSold[item]++;
             shopperPurse.UpdateBalance(price);
 
         }
@@ -248,7 +249,7 @@ namespace RPG.Shops
         {
             if (isBuyingMode)
             {
-                return stock[item];
+                return stockSold[item];
             }
 
             return CountItemsInInventory(item);
@@ -335,7 +336,7 @@ namespace RPG.Shops
             if (success)
             {
                 AddToTransaction(item, -1);
-                stock[item]--;
+                stockSold[item]--;
                 shopperPurse.UpdateBalance(-price);
             }
         }
@@ -359,6 +360,27 @@ namespace RPG.Shops
             if (stats == null) return 0;
 
             return stats.GetLevel();
+        }
+
+        public object CaptureState()
+        {
+            var saveObject = new Dictionary<string, int>();
+            foreach (var pair in stockSold)
+            {
+                saveObject[pair.Key.GetItemID()] = pair.Value;
+            }
+
+            return saveObject;
+        }
+
+        public void RestoreState(object state)
+        {
+            var saveObject = (Dictionary<string, int>)state;
+            stockSold.Clear();
+            foreach (var pair in saveObject)
+            {
+                stockSold[InventoryItem.GetFromID(pair.Key)] = pair.Value;
+            }
         }
     }
 

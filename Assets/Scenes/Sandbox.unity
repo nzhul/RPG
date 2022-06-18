@@ -255,7 +255,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39827272}
-  m_LocalRotation: {x: 0.05408667, y: -0.15793727, z: 0.008664218, w: 0.9859287}
+  m_LocalRotation: {x: 0.054086696, y: -0.15793732, z: 0.008664225, w: 0.9859287}
   m_LocalPosition: {x: -16.827469, y: 8.270673, z: 8.198874}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1572,7 +1572,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 5de8d5f40f47e0b47ad809ecd306739e, type: 2}
     - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: stockConfig.Array.data[0].initialStock
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: stockConfig.Array.data[1].initialStock
@@ -1580,7 +1580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: stockConfig.Array.data[2].initialStock
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: stockConfig.Array.data[3].initialStock
