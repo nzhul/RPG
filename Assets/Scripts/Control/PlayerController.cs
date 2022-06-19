@@ -1,4 +1,5 @@
-﻿using RPG.Attributes;
+﻿using GameDevTV.Inventories;
+using RPG.Attributes;
 using RPG.Movement;
 using System;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         private Health _health;
+        ActionStore _actionStore;
 
         [Serializable]
         struct CursorMapping
@@ -26,12 +28,15 @@ namespace RPG.Control
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float raycastRadius = 1f;
+        [SerializeField] int numberOfAbilities = 6;
 
         bool isDraggingUI = false;
 
         private void Awake()
         {
             _health = GetComponent<Health>();
+            _actionStore = GetComponent<ActionStore>();
+
         }
 
         private void Update()
@@ -46,6 +51,8 @@ namespace RPG.Control
                 SetCursor(CursorType.None);
                 return;
             }
+
+            UseAbilities();
 
             if (InteractWithComponent())
             {
@@ -84,6 +91,17 @@ namespace RPG.Control
             }
 
             return false;
+        }
+
+        private void UseAbilities()
+        {
+            for (int i = 0; i < numberOfAbilities; i++)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                {
+                    _actionStore.Use(0, gameObject);
+                }
+            }
         }
 
         private bool InteractWithComponent()
@@ -188,7 +206,7 @@ namespace RPG.Control
             return cursorMappings[0];
         }
 
-        private static Ray GetMouseRay()
+        public static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }

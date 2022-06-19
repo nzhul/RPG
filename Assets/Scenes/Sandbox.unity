@@ -677,6 +677,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 178985767709742501, guid: 0f12650c5032f3b4ca80c2f5326cf0c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 178985768962339786, guid: 0f12650c5032f3b4ca80c2f5326cf0c1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2991,6 +2995,18 @@ PrefabInstance:
     - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: shopName
       value: Jimbob's Shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
+      propertyPath: stockConfig.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
+      propertyPath: stockConfig.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: e84616a86b4e4da478ac87eeaf38bafd, type: 2}
+    - target: {fileID: 342430880907316653, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
+      propertyPath: stockConfig.Array.data[0].initialStock
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5896434264275087059, guid: ddf2af5284065a242b088c799ae52b49, type: 3}
       propertyPath: uniqueIdentifier
@@ -7001,7 +7017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715122675592831445, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -75.000244
+      value: -75.00012
       objectReference: {fileID: 0}
     - target: {fileID: 5715122675592831445, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
       propertyPath: m_AnchoredPosition.y

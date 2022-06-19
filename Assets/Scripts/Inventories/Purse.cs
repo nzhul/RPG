@@ -14,7 +14,6 @@ namespace RPG.Inventories
         private void Awake()
         {
             balance = startingBalance;
-            print($"Balance: {balance}");
         }
 
         public float GetBalance()
@@ -25,7 +24,6 @@ namespace RPG.Inventories
         public void UpdateBalance(float amount)
         {
             balance += amount;
-            print($"Balance: {balance}");
             onChange?.Invoke();
         }
 

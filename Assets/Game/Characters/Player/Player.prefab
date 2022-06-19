@@ -65,6 +65,7 @@ MonoBehaviour:
     hotspot: {x: 0, y: 0, z: 0}
   maxNavMeshProjectionDistance: 1
   raycastRadius: 1
+  numberOfAbilities: 6
 --- !u!114 &3337165743401252377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,19 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbcad01ee7e46341ada49e4c1b740d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6378424950602339488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769691526149128504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cfd719fc705cc04ca12a09ee615692f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  experiencePoints: 0
 --- !u!114 &6230979351842532543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +143,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingBalance: 400
+--- !u!114 &6378424950602339488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769691526149128504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfd719fc705cc04ca12a09ee615692f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experiencePoints: 0
+--- !u!114 &8589000139472630347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769691526149128504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e65fccc0ef23104fb2f43f08dc6f4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4706286607730303335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769691526149128504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bbb1c225d073e43b4a09afdf98bc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMana: 200
 --- !u!1001 &67609721022655986
 PrefabInstance:
   m_ObjectHideFlags: 0
