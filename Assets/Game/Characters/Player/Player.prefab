@@ -79,6 +79,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 16
+--- !u!114 &3605878663849599775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769691526149128504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443fda4e06ffc8541b48e0cd031b0967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusConfig:
+  - trait: 0
+    stat: 3
+    additiveBonusPerPoint: 0
+    percentageBonusPerPoint: 5
+  - trait: 2
+    stat: 0
+    additiveBonusPerPoint: 0
+    percentageBonusPerPoint: 5
+  - trait: 3
+    stat: 4
+    additiveBonusPerPoint: 0
+    percentageBonusPerPoint: 5
+  - trait: 3
+    stat: 5
+    additiveBonusPerPoint: 0
+    percentageBonusPerPoint: 5
 --- !u!114 &3765315547051214998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +134,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scatterDistance: 2
   dropLibrary: {fileID: 0}
+--- !u!114 &4706286607730303335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769691526149128504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bbb1c225d073e43b4a09afdf98bc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4818379555287593785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,19 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e65fccc0ef23104fb2f43f08dc6f4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4706286607730303335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769691526149128504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78bbb1c225d073e43b4a09afdf98bc98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMana: 200
 --- !u!1001 &67609721022655986
 PrefabInstance:
   m_ObjectHideFlags: 0

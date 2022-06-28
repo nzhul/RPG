@@ -255,7 +255,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39827272}
-  m_LocalRotation: {x: 0.05408667, y: -0.15793727, z: 0.008664218, w: 0.9859287}
+  m_LocalRotation: {x: 0.054086696, y: -0.15793732, z: 0.008664225, w: 0.9859287}
   m_LocalPosition: {x: -16.827469, y: 8.270673, z: 8.198874}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4258,6 +4258,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1183567888234852499, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: bonusConfig.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183567888234852499, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: bonusConfig.Array.data[4].stat
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183567888234852499, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: bonusConfig.Array.data[4].trait
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183567888234852499, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: bonusConfig.Array.data[4].additiveBonusPerPoint
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183567888234852499, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: bonusConfig.Array.data[4].percentageBonusPerPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1206561565656998799, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5445,6 +5465,10 @@ PrefabInstance:
     - target: {fileID: 2735462770673418254, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786412907669670672, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1400
       objectReference: {fileID: 0}
     - target: {fileID: 2815851116023696606, guid: bdc031d1266f3d949b3f3e93135ea798, type: 3}
       propertyPath: m_AnchorMax.y

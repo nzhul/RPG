@@ -16,6 +16,7 @@ namespace RPG.Shops
         [Range(0f, 100f)]
         [SerializeField] float sellingPercentage = 80f;
         [SerializeField] StockItemConfig[] stockConfig;
+        [SerializeField] float maximumBarterDiscountPercentage = 80f;
 
         [Serializable]
         class StockItemConfig
@@ -302,19 +303,33 @@ namespace RPG.Shops
 
         private Dictionary<InventoryItem, float> GetPrices()
         {
-            Dictionary<InventoryItem, float> result = new Dictionary<InventoryItem, float>();
+            Dictionary<InventoryItem, float> prices = new Dictionary<InventoryItem, float>();
 
-            foreach (var config in stockConfig)
+            foreach (var config in GetAvailableConfigs())
             {
-                if (!result.ContainsKey(config.item))
+                if (isBuyingMode)
                 {
-                    result[config.item] = config.item.GetPrice();
-                }
+                    if (!prices.ContainsKey(config.item))
+                    {
+                        prices[config.item] = config.item.GetPrice() * GetBarterDiscount();
+                    }
 
-                result[config.item] *= (1 - config.buyingDiscountPercentage / 100);
+                    prices[config.item] *= (1 - config.buyingDiscountPercentage / 100);
+                }
+                else
+                {
+                    prices[config.item] = config.item.GetPrice() * (sellingPercentage / 100);
+                }
             }
 
-            return result;
+            return prices;
+        }
+
+        private float GetBarterDiscount()
+        {
+            var baseStats = _currentShopper.GetComponent<BaseStats>();
+            var discount = baseStats.GetStat(Stat.BuyingDiscountPercentage);
+            return (1 - Mathf.Min(discount, maximumBarterDiscountPercentage) / 100);
         }
 
         private IEnumerable<StockItemConfig> GetAvailableConfigs()
