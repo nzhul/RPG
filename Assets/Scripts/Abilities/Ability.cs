@@ -1,6 +1,7 @@
 ﻿using GameDevTV.Inventories;
 using RPG.Abilities;
 using RPG.Attibutes;
+using RPG.Core;
 using UnityEngine;
 
 namespace Assets.Scripts.Abilities
@@ -26,6 +27,10 @@ namespace Assets.Scripts.Abilities
             if (cooldownStore.GetTimeRemaining(this) > 0) return;
 
             var data = new AbilityData(user);
+
+            var scheduler = user.GetComponent<ActionScheduler>();
+            scheduler.StartAction(data);
+
             targetingStrategy.StartTargeting(data,
                 () =>
                 {
@@ -35,6 +40,8 @@ namespace Assets.Scripts.Abilities
 
         private void TargetAquired(AbilityData data)
         {
+            if (data.IsCancelled()) return;
+
             var mana = data.GetUser().GetComponent<Mana>();
             if (!mana.UseMana(manaCost)) return;
 

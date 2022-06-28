@@ -99,7 +99,7 @@ namespace RPG.Control
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1 + i))
                 {
-                    _actionStore.Use(0, gameObject);
+                    _actionStore.Use(i, gameObject);
                 }
             }
         }

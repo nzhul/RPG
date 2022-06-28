@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625fb91cebdaded4da251326eab5925b, type: 3}
-  m_Name: Effect Splash
+  m_Script: {fileID: 11500000, guid: 8663ab1916997344f8bdc3a09033237d, type: 3}
+  m_Name: Self Targeting
   m_EditorClassIdentifier: 
-  healthChange: -10
