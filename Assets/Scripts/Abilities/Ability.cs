@@ -15,16 +15,16 @@ namespace Assets.Scripts.Abilities
         [SerializeField] float cooldownTime = 0f;
         [SerializeField] float manaCost = 0f;
 
-        public override void Use(GameObject user)
+        public override bool Use(GameObject user)
         {
             var mana = user.GetComponent<Mana>();
             if (mana.GetMana() < manaCost)
             {
-                return;
+                return false;
             }
 
             var cooldownStore = user.GetComponent<CooldownStore>();
-            if (cooldownStore.GetTimeRemaining(this) > 0) return;
+            if (cooldownStore.GetTimeRemaining(this) > 0) return false;
 
             var data = new AbilityData(user);
 
@@ -36,6 +36,8 @@ namespace Assets.Scripts.Abilities
                 {
                     TargetAquired(data); //dido: we are using lambda, so we can pass the data as argument.
                 });
+
+            return true;
         }
 
         private void TargetAquired(AbilityData data)

@@ -1,5 +1,5 @@
 using GameDevTV.Inventories;
-using RPG.Core;
+using GameDevTV.Utils;
 using RPG.Saving;
 using System;
 using System.Collections.Generic;
@@ -98,7 +98,6 @@ namespace RPG.Quests
 
         public bool? Evaluate(string predicate, string[] parameters)
         {
-
             switch (predicate)
             {
                 case "HasQuest":
@@ -108,7 +107,6 @@ namespace RPG.Quests
             }
 
             return null;
-
         }
     }
 

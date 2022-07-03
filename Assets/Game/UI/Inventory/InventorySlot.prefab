@@ -210,7 +210,7 @@ PrefabInstance:
     - target: {fileID: 7260453448564003565, guid: 1973af7fc3e1d2b428983f58906580be, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+      objectReference: {fileID: 11400000, guid: c8dd75a001e619840bff12ae16093cfe, type: 2}
     - target: {fileID: 7260453448564003565, guid: 1973af7fc3e1d2b428983f58906580be, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1

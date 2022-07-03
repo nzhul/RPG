@@ -21,15 +21,15 @@ namespace GameDevTV.UI.Inventories
         Equipment playerEquipment;
 
         // LIFECYCLE METHODS
-       
-        private void Awake() 
+
+        private void Awake()
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             playerEquipment = player.GetComponent<Equipment>();
             playerEquipment.equipmentUpdated += RedrawUI;
         }
 
-        private void Start() 
+        private void Start()
         {
             RedrawUI();
         }
@@ -40,7 +40,7 @@ namespace GameDevTV.UI.Inventories
         {
             EquipableItem equipableItem = item as EquipableItem;
             if (equipableItem == null) return 0;
-            if (equipableItem.GetAllowedEquipLocation() != equipLocation) return 0;
+            if (!equipableItem.CanEquip(equipLocation, playerEquipment)) return 0;
             if (GetItem() != null) return 0;
 
             return 1;
@@ -48,7 +48,7 @@ namespace GameDevTV.UI.Inventories
 
         public void AddItems(InventoryItem item, int number)
         {
-            playerEquipment.AddItem(equipLocation, (EquipableItem) item);
+            playerEquipment.AddItem(equipLocation, (EquipableItem)item);
         }
 
         public InventoryItem GetItem()

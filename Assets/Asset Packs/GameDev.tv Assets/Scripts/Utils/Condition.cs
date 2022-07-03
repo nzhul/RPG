@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace GameDevTV.Utils
 {
     [Serializable]
     public class Condition

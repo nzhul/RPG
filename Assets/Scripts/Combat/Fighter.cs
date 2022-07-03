@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
@@ -167,6 +167,12 @@ namespace RPG.Combat
             }
 
             var damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
+            var targetBaseStats = target.GetComponent<BaseStats>();
+            if (targetBaseStats != null)
+            {
+                var defence = targetBaseStats.GetStat(Stat.Defence);
+                damage /= 1 + defence / damage;
+            }
 
             if (currentWeapon.value != null)
             {
@@ -224,18 +230,6 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");
-        }
-
-        public object CaptureState()
-        {
-            return currentWeaponConfig.name;
-        }
-
-        public void RestoreState(object state)
-        {
-            var weaponName = (string)state;
-            var weapon = Resources.Load<WeaponConfig>(weaponName);
-            EquipWeapon(weapon);
         }
     }
 }
