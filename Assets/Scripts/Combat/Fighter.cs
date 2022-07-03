@@ -5,6 +5,7 @@ using RPG.Movement;
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Utils;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -15,6 +16,7 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] WeaponConfig defaultWeapon = null;
+        [SerializeField] float autoAttackRange = 4f;
 
         Health target;
         Equipment equipment;
@@ -47,14 +49,11 @@ namespace RPG.Combat
         {
             timeSinceLastAttack += Time.deltaTime;
 
-            if (target == null)
-            {
-                return;
-            }
-
+            if (target == null) return;
             if (target.IsDead())
             {
-                return;
+                target = FindNewTargetInRange();
+                if (target == null) return;
             }
 
             if (!IsInRange(target.transform))
@@ -72,6 +71,37 @@ namespace RPG.Combat
         {
             currentWeaponConfig = weapon;
             currentWeapon.value = AttachWeapon(weapon);
+        }
+
+        private Health FindNewTargetInRange()
+        {
+            Health best = null;
+            float bestDistance = Mathf.Infinity;
+
+            foreach (var candidate in FindAllTargetsInRange())
+            {
+                var candidateDistance = Vector3.Distance(transform.position, candidate.transform.position);
+                if (candidateDistance < bestDistance)
+                {
+                    best = candidate;
+                    bestDistance = candidateDistance;
+                }
+            }
+
+            return best;
+        }
+
+        private IEnumerable<Health> FindAllTargetsInRange()
+        {
+            RaycastHit[] raycastHits = Physics.SphereCastAll(transform.position, autoAttackRange, Vector3.up);
+            foreach (var hit in raycastHits)
+            {
+                var health = hit.transform.GetComponent<Health>();
+                if (health == null) continue;
+                if (health.IsDead()) continue;
+                if (health.gameObject == gameObject) continue;
+                yield return health;
+            }
         }
 
         private void UpdateWeapon()

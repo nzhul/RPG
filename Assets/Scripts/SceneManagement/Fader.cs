@@ -48,7 +48,8 @@ namespace RPG.SceneManagement
         {
             while (!Mathf.Approximately(canvasGroup.alpha, target))
             {
-                canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, Time.deltaTime / time);
+                // dido: Time.unscaledDeltaTime is like deltaTime, but it is not being affected by Time.timescale;
+                canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, Time.unscaledDeltaTime / time);
                 yield return null;
             }
         }

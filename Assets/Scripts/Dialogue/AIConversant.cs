@@ -1,3 +1,4 @@
+using RPG.Attributes;
 using RPG.Control;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace RPG.Dialogue
                 return false;
             }
 
+            if (GetComponent<Health>().IsDead()) return false;
             if (Input.GetMouseButtonDown(0))
             {
                 callingController.GetComponent<PlayerConversant>().StartDialogue(this, _dialogue);
